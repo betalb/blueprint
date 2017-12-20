@@ -88,7 +88,7 @@ const scssLoaders = [
 ];
 
 module.exports = {
-    devtool: IS_PRODUCTION ? false : "inline-source-map",
+    devtool: IS_PRODUCTION ? "hidden-source-map" : "inline-source-map",
 
     devServer: {
         contentBase: "./src",
@@ -110,6 +110,13 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test: [
+                    require.resolve('dom4'),
+                    require.resolve('es6-shim'),
+                ],
+                use: 'null-loader'
+            },
             {
                 test: /\.tsx?$/,
                 loader: require.resolve("awesome-typescript-loader"),
